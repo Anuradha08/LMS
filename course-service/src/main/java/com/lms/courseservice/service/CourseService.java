@@ -22,16 +22,17 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
-    public long deleteCourse(String courseId) {
-        return courseRepository.deleteByCourseName(courseId);
+    public long deleteCourse(int id) {
+        return courseRepository.deleteById(id);
     }
 
     public List<Course> getCoursesByTechnology(String technology) {
         return courseRepository.findByTechnology(technology);
     }
 
-    public List<Course> getCourseByTechnologyOrDuration(String technology, Date startDate, Date endDate) {
-        return courseRepository.findByTechnologyOrDurationBetween(technology, startDate, endDate);
+    public List<Course> filterRecords(String technology, Date durationFrom, Date durationTo) {
+        List<Course> durationFilter = courseRepository.filterRecords(technology, durationFrom, durationTo);
+        return durationFilter;
     }
 
 }

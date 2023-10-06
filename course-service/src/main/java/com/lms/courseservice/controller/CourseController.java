@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/v1.0/lms/courses")
@@ -51,12 +52,12 @@ public class CourseController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping(path = "/delete/{courseId}")
-    public ResponseEntity<Long> deleteCourse(@PathVariable("courseId") String courseId){
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<Long> deleteCourse(@PathVariable("id") int id){
         Long courseRes = null;
         try{
-            courseRes = courseService.deleteCourse(courseId);
-            logger.info("Course with courseId " + courseId + " deleted successfully");
+            courseRes = courseService.deleteCourse(id);
+            logger.info("Course with courseId " + id + " deleted successfully");
         }
         catch (Exception e){
             logger.info("Unable to delete Course "+ e.getMessage());
@@ -64,13 +65,15 @@ public class CourseController {
         return ResponseEntity.ok(courseRes);
     }
 
-    @GetMapping(path = "/courses/get")
-    public ResponseEntity<List<Course>> getCourseByDuration(@RequestParam String technology, @RequestParam String startDate, @RequestParam String endDate){
+    @GetMapping(path = "/get")
+    public ResponseEntity<List<Course>> getCourseByDuration(@RequestParam String technology, @RequestParam String durationFrom, @RequestParam String durationTo){
         List<Course> courses = new ArrayList<>();
         try {
-            SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            courses = courseService.getCourseByTechnologyOrDuration(technology, dateFormat.parse(startDate), dateFormat.parse(endDate));
-            logger.info("Courses fetched between duration " + startDate + " and " + endDate + " are " + courses);
+            SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+            Date dateFrom = dateFormat.parse(durationFrom);
+            Date dateTo = dateFormat.parse(durationTo);
+            courses = courseService.filterRecords(technology, dateFrom, dateTo);
+            logger.info("Courses fetched between duration " + durationFrom + " and " + durationTo + " are " + courses);
         }
         catch (Exception e)
         {

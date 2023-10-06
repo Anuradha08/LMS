@@ -35,7 +35,7 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(path = "/company/login")
+    @PostMapping(path = "/login")
     public ResponseEntity loginUser(@RequestBody User user) throws Exception {
         User response = new User();
         try {

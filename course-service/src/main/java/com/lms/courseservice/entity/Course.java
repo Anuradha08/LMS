@@ -2,10 +2,8 @@ package com.lms.courseservice.entity;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -15,22 +13,29 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Size(min = 20)
+
     @NotBlank(message = "Name is mandatory")
     @Column(name = "courseName")
     private String courseName;
+
     @NotNull(message = "Duration From is mandatory")
     @Column(name="durationFrom")
     private Date durationFrom;
+
     @NotNull(message = "Duration To is mandatory")
     @Column(name="durationTo")
     private Date durationTo;
-    @Size(min = 100)
+
     @NotBlank(message = "Description is mandatory")
+    @Column(name="description")
     private String description;
+
     @NotBlank(message = "Technology is mandatory")
+    @Column(name="technology")
     private String technology;
+
     @NotBlank(message = "URL is mandatory")
+    @Column(name="launchurl")
     private String launchURL;
 
 

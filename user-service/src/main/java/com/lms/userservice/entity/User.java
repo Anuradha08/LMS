@@ -1,8 +1,6 @@
 package com.lms.userservice.entity;
 
 
-import com.lms.userservice.ValidPassword;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -25,10 +23,12 @@ public class User {
     @Column(name = "emailid")
     private String emailId;
 
-    @ValidPassword
     @NotBlank(message = "Password is mandatory")
     @Column(name = "password")
     private String password;
+
+    @Column(name = "isadmin")
+    private boolean isAdmin;
 
 
     public String getName() {
@@ -53,5 +53,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin =  isAdmin;
     }
 }
