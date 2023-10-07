@@ -30,13 +30,13 @@ public class UserController {
             logger.info("User registration successful");
         }
         catch(Exception e){
-            logger.info("User registration failed - " + e.getMessage());
+            logger.info("User registration failed - {}", e.getMessage());
         }
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(path = "/login")
-    public ResponseEntity loginUser(@RequestBody User user) throws Exception {
+    public ResponseEntity loginUser(@RequestBody User user) {
         User response = new User();
         try {
             response = userService.login(user);
@@ -45,7 +45,7 @@ public class UserController {
             }
         }
         catch(Exception e){
-            logger.info("Unable to login - "+ e.getMessage());
+            logger.info("Unable to login - {}",e.getMessage());
         }
         return ResponseEntity.ok(response);
     }

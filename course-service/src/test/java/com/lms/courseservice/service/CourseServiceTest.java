@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
-public class CourseServiceTest {
+class CourseServiceTest {
     @InjectMocks
     private CourseService courseService;
 

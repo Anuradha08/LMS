@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.when;
 
-public class UserControllerTest {
+class UserControllerTest {
     @InjectMocks
     UserController userController;
 
@@ -50,6 +50,22 @@ public class UserControllerTest {
     }
 
     @Test
+    void testRegisterUserException() throws Exception {
+        when(userService.save(Mockito.<User>any())).thenThrow(new NullPointerException());
+        User user = new User();
+        user.setEmailId("name@gmail.com");
+        user.setName("Name");
+        user.setPassword("Password");
+        user.setIsAdmin(false);
+        String content = (new ObjectMapper()).writeValueAsString(user);
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1.0/lms/company/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content);
+        ResultActions actualPerformResult = this.mockMvc.perform(requestBuilder);
+        actualPerformResult.andExpect(MockMvcResultMatchers.status().is(200));
+    }
+
+    @Test
     void testLoginUser() throws Exception {
         User user = new User();
         user.setEmailId("name@gmail.com");
@@ -58,6 +74,42 @@ public class UserControllerTest {
         user.setIsAdmin(false);
 
         when(userService.login(Mockito.<User>any())).thenReturn(user);
+
+        String content = (new ObjectMapper()).writeValueAsString(user);
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1.0/lms/company/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content);
+        ResultActions actualPerformResult = this.mockMvc.perform(requestBuilder);
+        actualPerformResult.andExpect(MockMvcResultMatchers.status().is(200));
+    }
+
+    @Test
+    void testLoginUserNull() throws Exception {
+        User user = new User();
+        user.setEmailId("name@gmail.com");
+        user.setName("Name");
+        user.setPassword("Password");
+        user.setIsAdmin(false);
+
+        when(userService.login(Mockito.<User>any())).thenReturn(null);
+
+        String content = (new ObjectMapper()).writeValueAsString(user);
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1.0/lms/company/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content);
+        ResultActions actualPerformResult = this.mockMvc.perform(requestBuilder);
+        actualPerformResult.andExpect(MockMvcResultMatchers.status().is(200));
+    }
+
+    @Test
+    void testLoginUserException() throws Exception {
+        User user = new User();
+        user.setEmailId("name@gmail.com");
+        user.setName("Name");
+        user.setPassword("Password");
+        user.setIsAdmin(false);
+
+        when(userService.login(Mockito.<User>any())).thenThrow(new NullPointerException());
 
         String content = (new ObjectMapper()).writeValueAsString(user);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1.0/lms/company/login")

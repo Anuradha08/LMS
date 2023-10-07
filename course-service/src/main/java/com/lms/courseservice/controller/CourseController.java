@@ -13,7 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/v1.0/lms/courses")
@@ -30,9 +29,9 @@ public class CourseController {
         logger.info("Inside getAllCourses");
         try{
             courses = courseService.getAllCourses();
-            logger.info("List of courses: " + courses);
+            logger.info("List of courses: {}", courses);
         }catch (Exception e){
-            logger.info("Exception while getting all courses e { }",e);
+            logger.info("Unable to get list of courses {}", e.getMessage());
         }
 
         return ResponseEntity.ok(courses);
@@ -44,10 +43,10 @@ public class CourseController {
         logger.info("Inside add course");
         try {
             response = courseService.save(course);
-            logger.info("Course "+response.getId()+" added successfully");
+            logger.info("Course {} added successfully", response.getId());
         }
         catch(Exception e){
-            logger.info("Unable to add course "+ e.getMessage());
+            logger.info("Unable to add course {}", e.getMessage());
         }
         return ResponseEntity.ok(response);
     }
@@ -57,10 +56,10 @@ public class CourseController {
         Long courseRes = null;
         try{
             courseRes = courseService.deleteCourse(id);
-            logger.info("Course with courseId " + id + " deleted successfully");
+            logger.info("Course with courseId {} deleted successfully",id);
         }
         catch (Exception e){
-            logger.info("Unable to delete Course "+ e.getMessage());
+            logger.info("Unable to delete Course {}", e.getMessage());
         }
         return ResponseEntity.ok(courseRes);
     }
@@ -73,11 +72,11 @@ public class CourseController {
             Date dateFrom = dateFormat.parse(durationFrom);
             Date dateTo = dateFormat.parse(durationTo);
             courses = courseService.filterRecords(technology, dateFrom, dateTo);
-            logger.info("Courses fetched between duration " + durationFrom + " and " + durationTo + " are " + courses);
+            logger.info("Courses fetched between duration {} and {} are {}", durationFrom, durationTo, courses);
         }
         catch (Exception e)
         {
-            logger.info("Unable to get courses by duration "+ e.getMessage());
+            logger.info("Unable to get courses by duration {}", e.getMessage());
         }
         return ResponseEntity.ok(courses);
     }
@@ -87,10 +86,10 @@ public class CourseController {
         List<Course> response = new ArrayList<>();
         try {
             response = courseService.getCoursesByTechnology(technology);
-            logger.debug("Courses fetched by technology " + technology + " are " + response);
+            logger.info("Courses fetched by technology {} are {}",technology,response);
         }
         catch(Exception e){
-            logger.info("Unable to get courses by technology "+ e.getMessage());
+            logger.info("Unable to get courses by technology {}", e.getMessage());
         }
         return ResponseEntity.ok(response);
     }

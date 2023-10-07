@@ -31,8 +31,7 @@ public class CourseService {
     }
 
     public List<Course> filterRecords(String technology, Date durationFrom, Date durationTo) {
-        List<Course> durationFilter = courseRepository.filterRecords(technology, durationFrom, durationTo);
-        return durationFilter;
+        return courseRepository.filterRecords(technology, durationFrom, durationTo);
     }
 
 }
