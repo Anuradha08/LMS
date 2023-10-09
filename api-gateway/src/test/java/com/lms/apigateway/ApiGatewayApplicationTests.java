@@ -1,10 +1,10 @@
-package com.lms.zuulclient;
+package com.lms.apigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ZuulClientApplicationTests {
+class ApiGatewayApplicationTests {
 
 	@Test
 	void contextLoads() {

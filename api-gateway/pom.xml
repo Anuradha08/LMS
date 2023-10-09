@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.lms</groupId>
-	<artifactId>zuul-client</artifactId>
+	<artifactId>api-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>zuul-client</name>
-	<description>Zuul project for LMS</description>
+	<name>api-gateway</name>
+	<description>Api Gateway project for LMS</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2021.0.8</spring-cloud.version>

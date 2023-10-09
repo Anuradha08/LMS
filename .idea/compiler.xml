@@ -7,28 +7,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="zuul-client" />
-        <module name="config-server" />
         <module name="user-service" />
         <module name="course-service" />
         <module name="eureka-server" />
+        <module name="config-server" />
+        <module name="api-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api-gateway" target="11" />
       <module name="config-server" target="11" />
       <module name="course-service" target="11" />
       <module name="eureka-server" target="11" />
       <module name="user-service" target="11" />
-      <module name="zuul-client" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="course-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="user-service" options="-parameters" />
-      <module name="zuul-client" options="-parameters" />
     </option>
   </component>
 </project>
