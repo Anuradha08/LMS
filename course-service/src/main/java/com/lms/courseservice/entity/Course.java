@@ -94,4 +94,17 @@ public class Course {
     public void setLaunchURL(String launchURL) {
         this.launchURL = launchURL;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", courseName='" + courseName + '\'' +
+                ", durationFrom=" + durationFrom +
+                ", durationTo=" + durationTo +
+                ", description='" + description + '\'' +
+                ", technology='" + technology + '\'' +
+                ", launchURL='" + launchURL + '\'' +
+                '}';
+    }
 }

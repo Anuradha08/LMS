@@ -62,4 +62,15 @@ public class User {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin =  isAdmin;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", emailId='" + emailId + '\'' +
+                ", password='" + password + '\'' +
+                ", isAdmin=" + isAdmin +
+                '}';
+    }
 }

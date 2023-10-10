@@ -43,7 +43,7 @@ public class CourseController {
         logger.info("Inside add course");
         try {
             response = courseService.save(course);
-            logger.info("Course {} added successfully", response.getId());
+            logger.info("{} added successfully", response);
         }
         catch(Exception e){
             logger.info("Unable to add course {}", e.getMessage());
@@ -56,7 +56,7 @@ public class CourseController {
         Long courseRes = null;
         try{
             courseRes = courseService.deleteCourse(id);
-            logger.info("Course with courseId {} deleted successfully",id);
+            logger.info("{} deleted successfully",courseRes);
         }
         catch (Exception e){
             logger.info("Unable to delete Course {}", e.getMessage());

@@ -27,7 +27,7 @@ public class UserController {
         User response = new User();
         try {
             response = userService.save(user);
-            logger.info("User registration successful");
+            logger.info("{} registration successful", user);
         }
         catch(Exception e){
             logger.info("User registration failed - {}", e.getMessage());
@@ -42,7 +42,9 @@ public class UserController {
             response = userService.login(user);
             if(response == null){
                 logger.info("Incorrect Username or Password");
+                return ResponseEntity.ok(response);
             }
+            logger.info("{} login successful", response);
         }
         catch(Exception e){
             logger.info("Unable to login - {}",e.getMessage());
